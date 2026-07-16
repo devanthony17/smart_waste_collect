@@ -11,7 +11,7 @@ import toast from 'react-hot-toast';
 export function LoginPage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { login, user } = useAuth();
+  const { login } = useAuth();
   const { stats, loading: statsLoading } = useAppStats();
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,12 +25,13 @@ export function LoginPage() {
     setIsSubmitting(true);
 
     try {
-      await login(formData.email, formData.password);
+      const profile = await login(formData.email, formData.password);
 
       toast.success(t('login_welcome_back'));
 
-      const storedRole = user?.role || localStorage.getItem('fallback-user-role') || 'citizen';
-      if (storedRole === 'super_admin' || storedRole === 'municipality_admin' || storedRole === 'company_admin') {
+      const storedRole = profile?.role || localStorage.getItem('fallback-user-role') || 'citizen';
+      const normalizedRole = String(storedRole).toLowerCase();
+      if (normalizedRole === 'super_admin' || normalizedRole === 'municipality_admin' || normalizedRole === 'company_admin') {
         navigate('/admin/dashboard');
       } else {
         navigate('/dashboard');

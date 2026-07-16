@@ -27,6 +27,11 @@ const fallbackAdminProfile = {
   is_verified: true,
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
+  user_metadata: {
+    role: 'super_admin',
+    first_name: 'Admin',
+    last_name: 'User',
+  },
 };
 
 const fallbackAdminSession = {
