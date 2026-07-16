@@ -714,7 +714,7 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: localStorage.getItem("wastecollect_lang") || "sw",
+  lng: localStorage.getItem("wastecollect_lang") || "en",
   fallbackLng: "en",
   interpolation: {
     escapeValue: false,

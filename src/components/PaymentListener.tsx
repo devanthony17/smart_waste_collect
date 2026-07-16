@@ -4,8 +4,13 @@ import toast from "react-hot-toast";
 
 export function PaymentListener() {
   useEffect(() => {
-    const channel = supabase
-      .channel("payment-notifications")
+    const channel = supabase.channel?.("payment-notifications");
+
+    if (!channel) {
+      return undefined;
+    }
+
+    const subscription = channel
       .on(
         "postgres_changes",
         {
@@ -26,7 +31,9 @@ export function PaymentListener() {
       .subscribe();
 
     return () => {
-      supabase.removeChannel(channel);
+      if (typeof supabase.removeChannel === "function") {
+        supabase.removeChannel(subscription);
+      }
     };
   }, []);
 

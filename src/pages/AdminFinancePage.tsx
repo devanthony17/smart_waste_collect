@@ -73,7 +73,7 @@ export default function AdminFinancePage() {
       <div className="bg-green-600 text-white rounded-xl p-6">
         <p>Total Revenue</p>
         <h2 className="text-3xl font-bold mt-2">
-          TZS {totalRevenue.toLocaleString()}
+          GHS {totalRevenue.toLocaleString()}
         </h2>
       </div>
 
@@ -99,7 +99,7 @@ export default function AdminFinancePage() {
             {payments.map((payment) => (
               <tr key={payment.id} className="border-b">
                 <td className="p-3">
-                  TZS {Number(payment.amount).toLocaleString()}
+                  GHS {Number(payment.amount).toLocaleString()}
                 </td>
                 <td className="p-3 capitalize">
                   {payment.payment_method?.replace("_", " ") ?? "—"}

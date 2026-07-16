@@ -28,7 +28,14 @@ export function LoginPage() {
       await login(formData.email, formData.password);
 
       toast.success(t('login_welcome_back'));
-      navigate('/dashboard');
+
+      const storedRole = localStorage.getItem('fallback-user-role');
+      const role = storedRole || 'citizen';
+      if (role === 'super_admin' || role === 'municipality_admin' || role === 'company_admin') {
+        navigate('/admin/dashboard');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (error: any) {
       console.error('Login failed:', error?.message);
 

@@ -29,6 +29,9 @@ const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 const AdminDashboardPage = lazy(() => import("./pages/AdminDashboardPage"));
 const AdminFinancePage = lazy(() => import("./pages/AdminFinancePage"));
 const AdminReportsPage = lazy(() => import("./pages/AdminReportsPage"));
+const AnalyticsPage = lazy(() => import("./pages/AnalyticsPage"));
+const SchedulesPage = lazy(() => import("./pages/SchedulesPage"));
+const RecyclingPage = lazy(() => import("./pages/RecyclingPage"));
 
 /* ================= PROTECTED ROUTE ================= */
 function ProtectedRoute() {
@@ -91,36 +94,15 @@ function App() {
             <Route path="/settings" element={<SettingsPage />} />
 
             {/* Placeholders — zinaonyesha ukurasa badala ya kurudi home */}
-            <Route
-              path="/schedules"
-              element={
-                <div className="flex items-center justify-center min-h-screen text-gray-400 text-xl">
-                  🗓️ Schedules — Coming Soon
-                </div>
-              }
-            />
-            <Route
-              path="/recycling"
-              element={
-                <div className="flex items-center justify-center min-h-screen text-gray-400 text-xl">
-                  ♻️ Recycling — Coming Soon
-                </div>
-              }
-            />
+            <Route path="/schedules" element={<SchedulesPage />} />
+            <Route path="/recycling" element={<RecyclingPage />} />
           </Route>
 
           {/* ADMIN ONLY */}
           <Route element={<AdminRoute roles={["super_admin", "municipality_admin", "company_admin"]} />}>
             <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
             <Route path="/reports" element={<AdminReportsPage />} />
-            <Route
-              path="/analytics"
-              element={
-                <div className="flex items-center justify-center min-h-screen text-gray-400 text-xl">
-                  📊 Analytics — Coming Soon
-                </div>
-              }
-            />
+            <Route path="/analytics" element={<AnalyticsPage />} />
           </Route>
 
           <Route element={<AdminRoute roles={["super_admin", "municipality_admin"]} />}>
