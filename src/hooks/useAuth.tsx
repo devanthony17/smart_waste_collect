@@ -23,6 +23,20 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const normalizeRole = (value?: string): UserRole => {
+  const normalized = value?.toLowerCase();
+
+  if (normalized === "super_admin" || normalized === "municipality_admin" || normalized === "company_admin") {
+    return normalized as UserRole;
+  }
+
+  if (normalized === "driver") {
+    return "driver";
+  }
+
+  return "citizen";
+};
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -75,23 +89,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const authUser = authData.user;
 
         if (authUser) {
-          setUser({
+          const role = normalizeRole(authUser.user_metadata?.role);
+          const profile = {
             id: authUser.id,
             email: authUser.email || "",
-            role: "citizen",
-            first_name: "",
-            last_name: "",
+            role,
+            first_name: authUser.user_metadata?.first_name || "",
+            last_name: authUser.user_metadata?.last_name || "",
             is_active: true,
             is_verified: true,
             created_at: authUser.created_at,
             updated_at: authUser.created_at,
-          } as User);
+          } as User;
+
+          localStorage.setItem("fallback-user-role", role);
+          setUser(profile);
         }
 
         return;
       }
 
-      setUser(data);
+      const role = normalizeRole(data.role);
+      localStorage.setItem("fallback-user-role", role);
+      setUser({ ...data, role });
     } catch (err) {
       console.error("Profile fetch error:", err);
     } finally {
@@ -150,6 +170,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // ================= LOGOUT =================
   const logout = async () => {
     await supabase.auth.signOut();
+    localStorage.removeItem("fallback-user-role");
     setUser(null);
   };
 

@@ -11,7 +11,7 @@ import toast from 'react-hot-toast';
 export function LoginPage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const { stats, loading: statsLoading } = useAppStats();
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,9 +29,8 @@ export function LoginPage() {
 
       toast.success(t('login_welcome_back'));
 
-      const storedRole = localStorage.getItem('fallback-user-role');
-      const role = storedRole || 'citizen';
-      if (role === 'super_admin' || role === 'municipality_admin' || role === 'company_admin') {
+      const storedRole = user?.role || localStorage.getItem('fallback-user-role') || 'citizen';
+      if (storedRole === 'super_admin' || storedRole === 'municipality_admin' || storedRole === 'company_admin') {
         navigate('/admin/dashboard');
       } else {
         navigate('/dashboard');
