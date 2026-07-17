@@ -20,27 +20,21 @@ export default function LandingPage() {
         <LanguageSwitcher variant="light" />
       </div>
 
-      <section
-        className="relative text-white bg-center bg-no-repeat bg-cover px-6 md:px-8 py-16 min-h-[600px] flex flex-col justify-center"
-        style={{
-          backgroundImage: "url('/images/hero-bg.png')",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/50" />
+      <section className="relative text-white px-6 md:px-8 min-h-[600px] flex flex-col justify-center overflow-hidden">
+        <Hero />
+        
+        <div className="relative z-20 w-full max-w-5xl mx-auto">
 
-        <div className="relative z-10">
-          <Hero />
-
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <div className="mt-16 flex flex-wrap justify-center gap-4 relative z-20">
             <button
               onClick={() => navigate("/register")}
-              className="px-6 py-3 rounded-xl bg-primary-600 font-semibold hover:bg-primary-700 transition"
+              className="px-8 py-3.5 rounded-xl bg-primary-600 text-white font-bold hover:bg-primary-700 shadow-lg shadow-primary-500/30 transition-all hover:-translate-y-1"
             >
               Get Started
             </button>
             <button
               onClick={() => navigate("/login")}
-              className="px-6 py-3 rounded-xl border border-gray-300 bg-white text-gray-700 font-semibold hover:bg-gray-100 transition"
+              className="px-8 py-3.5 rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm text-white font-bold hover:bg-white/20 transition-all hover:-translate-y-1"
             >
               Login
             </button>
