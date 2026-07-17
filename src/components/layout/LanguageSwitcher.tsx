@@ -5,7 +5,7 @@ export function LanguageSwitcher({ variant = "default" }: { variant?: "default" 
   const { i18n } = useTranslation();
 
   const toggleLanguage = () => {
-    const next = i18n.language === "sw" ? "en" : "sw";
+    const next = i18n.language === "tw" ? "en" : "tw";
     i18n.changeLanguage(next);
   };
 
@@ -22,7 +22,7 @@ export function LanguageSwitcher({ variant = "default" }: { variant?: "default" 
     >
       <Languages className="w-5 h-5" />
       <span className="uppercase">
-        {i18n.language === "sw" ? "SW" : "EN"}
+        {i18n.language === "tw" ? "TW" : "EN"}
       </span>
     </button>
   );
