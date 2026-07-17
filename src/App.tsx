@@ -29,6 +29,7 @@ const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 const AdminDashboardPage = lazy(() => import("./pages/AdminDashboardPage"));
 const AdminFinancePage = lazy(() => import("./pages/AdminFinancePage"));
 const AdminReportsPage = lazy(() => import("./pages/AdminReportsPage"));
+const AdminUsersPage = lazy(() => import("./pages/AdminUsersPage"));
 const AnalyticsPage = lazy(() => import("./pages/AnalyticsPage"));
 const SchedulesPage = lazy(() => import("./pages/SchedulesPage"));
 const RecyclingPage = lazy(() => import("./pages/RecyclingPage"));
@@ -103,6 +104,7 @@ function App() {
             <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
             <Route path="/reports" element={<AdminReportsPage />} />
             <Route path="/analytics" element={<AnalyticsPage />} />
+            <Route path="/admin/users" element={<AdminUsersPage />} />
           </Route>
 
           <Route element={<AdminRoute roles={["super_admin", "municipality_admin"]} />}>

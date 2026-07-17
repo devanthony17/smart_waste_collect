@@ -13,6 +13,7 @@ import {
   MessageSquare,
   X,
   Leaf,
+  UserCog,
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { useAuth } from '../../hooks/useAuth';
@@ -38,6 +39,12 @@ const navItems: NavItem[] = [
     labelKey: 'nav_analytics',
     path: '/analytics',
     icon: BarChart3,
+    roles: ['super_admin', 'municipality_admin', 'company_admin'],
+  },
+  {
+    labelKey: 'nav_users',
+    path: '/admin/users',
+    icon: UserCog,
     roles: ['super_admin', 'municipality_admin', 'company_admin'],
   },
   { labelKey: 'nav_complaints', path: '/complaints', icon: MessageSquare },
